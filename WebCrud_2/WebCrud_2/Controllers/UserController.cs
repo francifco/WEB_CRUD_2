@@ -15,17 +15,22 @@ namespace WebCrud_2.Controllers
             return View();
         }
 
-        public JsonResult LogIn(string username, string password)
+        /// <summary>
+        /// Metodo responsable del inicio de la autentificacion de usuario.
+        /// </summary>
+        /// <param name="username">string: nombre de usuario</param>
+        /// <param name="password">string: clave del usuario</param>
+        /// <returns>JSONObjet: objeto respresentante del usuario.</returns>
+        public string LogIn(puser userEntity)
         {
             using (UserEntities userModel = new UserEntities())
             {
                 var objectUser = from user in userModel.pusers
-                                 where user.username == username && user.password == password
+                                 where user.username == userEntity.username && user.password == userEntity.password
                                  select user;
 
-                return Json((objectUser), JsonRequestBehavior.AllowGet);
+                return objectUser.Single().username; 
             }
-
         }
 
 

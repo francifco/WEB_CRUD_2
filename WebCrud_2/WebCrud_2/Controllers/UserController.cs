@@ -21,7 +21,7 @@ namespace WebCrud_2.Controllers
         /// <param name="username">string: nombre de usuario</param>
         /// <param name="password">string: clave del usuario</param>
         /// <returns>JSONObjet: objeto respresentante del usuario.</returns>
-        public string LogIn(puser userEntity)
+        public JsonResult LogIn(puser userEntity)
         {
             using (UserEntities userModel = new UserEntities())
             {
@@ -29,7 +29,7 @@ namespace WebCrud_2.Controllers
                                  where user.username == userEntity.username && user.password == userEntity.password
                                  select user;
 
-                return objectUser.Single().username; 
+                return Json(objectUser.Single()); 
             }
         }
 
